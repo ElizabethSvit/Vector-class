@@ -66,7 +66,6 @@ public:
     
     // assignment operator
     Vector& operator = (const Vector& other) {
-        // x = x
         if (this == &other) {
             return *this;
         }
