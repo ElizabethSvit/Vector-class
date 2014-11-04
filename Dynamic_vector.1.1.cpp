@@ -45,7 +45,7 @@ public:
         if (this == &other) {
             return *this;
         }
-
+        
         delete [] data_;
         data_ = nullptr;
         
@@ -62,39 +62,42 @@ public:
     Vector operator + (Vector second) {
         assert(size_ == second.size_);
         
+        Vector sum(size_);
         for (int i = 0; i < size_; ++i) {
-            this->data_[i] += second.data_[i];
+            sum.data_[i] = this->data_[i] + second.data_[i];
         }
         
-        return *this;
+        return sum;
     }
     
     Vector operator - (Vector second) {
         assert(size_ == second.size_);
         
+        Vector sum(size_);
         for (int i = 0; i < size_; ++i) {
-            this->data_[i] -= second.data_[i];
+            sum.data_[i] = this->data_[i] - second.data_[i];
         }
         
-        return *this;
+        return sum;
     }
     
     Vector operator * (double k) {
         
+        Vector sum(size_);
         for (int i = 0; i < size_; ++i) {
-            this->data_[i] *= k;
+            sum.data_[i] = this->data_[i] * k;
         }
         
-        return *this;
+        return sum;
     }
     
     Vector operator / (double k) {
-        
+        Vector sum(size_);
         for (int i = 0; i < size_; ++i) {
-            this->data_[i] /= k;
+            sum.data_[i] = this->data_[i] / k;
         }
         
-        return *this;
+        return sum;
     }
     
     bool operator == (Vector second) {
@@ -163,17 +166,18 @@ public:
 int main() {
     Vector one(5);
     Vector two(5);
+    Vector sum(5);
     
     std::cout << "Before " << std::endl;
     one.readFromInput();
     two.readFromInput();
     
     std::cout << "After " << std::endl;
-    one.operator + (two);
+    sum = one + two;
     two.operator - (one);
     one.operator * (5);
-    one.output();
-    two.output();
+    sum.output();
+    //two.output();
     std::cout << one.GetNorm() << std::endl;
     std::cout << one.operator != (two) << std::endl;
     one.Normalize().output();
